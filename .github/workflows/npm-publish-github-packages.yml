@@ -1,0 +1,32 @@
+
+name: Node.js 
+
+on:
+  push:
+    branches: 
+       - main
+  workflow_dispatch:
+
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install jq tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Show version Node
+        run: node -version
+      - name: Install dependencies
+        run: npm install
+      - name: Test
+      - run: npm test
+
+  
+     
