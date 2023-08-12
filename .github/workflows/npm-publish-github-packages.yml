@@ -1,5 +1,5 @@
 
-name: Node.js 
+name: CI
 
 on:
   push:
@@ -11,22 +11,19 @@ jobs:
   my_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Install jq tool
-        run: |
-          sudo apt-get update
-          sudo apt-get install jq
-      - name: Set up Node
+      - name: Use custom node version
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - name: Show version Node
-        run: node -version
+         node-version: 16
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+         repository: Pasechnyktanya/dofd-05-node-Pasechnyktanya-main
+         ref: main
       - name: Install dependencies
-        run: npm install
+        run: "npm install --legacy-peer-deps"
       - name: Test
-      - run: npm test
+        run: "npm test"
 
   
      
