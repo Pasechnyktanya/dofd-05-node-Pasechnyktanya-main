@@ -1,4 +1,3 @@
-
 name: CI
 
 on:
@@ -8,25 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  my_job:
     runs-on: ubuntu-latest
     steps:
       - name: Node version
         uses: actions/setup-node@v3
-      - name: Install Software
-        run: |
-             sudo apt update
-             sudo apt install -y nodejs npm
+        with:
+         node-version: 16
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
          repository: Pasechnyktanya/dofd-05-node-Pasechnyktanya-main
          ref: main
+      - name: Install dependencies
+        run: "npm install --legacy-peer-deps"
       - name: Clone Project
         run: git clone https://github.com/Pasechnyktanya/dofd-05-node-Pasechnyktanya-main
       - name: Install dependencies
         run: npm install 
-      - name: Build Project
+      - name: Build 
         run: npm run build 
       
       - name: Run Unit Tests
